@@ -16,7 +16,11 @@ for PLATFORM_ENV in ${PLATFORM_ENVS[*]};
 do
   PUBLISHER_DIR=$CPE_DIR/formbuilder-publisher-$PLATFORM_ENV
   mkdir -p $PUBLISHER_DIR
-  helm template fb-publisher -f ./fb-publisher/values/$PLATFORM_ENV-values.yaml > $PUBLISHER_DIR/k8.yaml
+  PUBLISHER_CONFIG=("00-namespace" "01-rbac" "02-limitrange" "03-resourcequota" "04-networkpolicy" "publisher-workers-service-account")
+  for CONFIG in ${PUBLISHER_CONFIG[*]};
+  do
+    helm template fb-publisher -f ./fb-publisher/values/$PLATFORM_ENV-values.yaml -x templates/$CONFIG.yaml > $PUBLISHER_DIR/$CONFIG.yaml
+  done
   # TODO: copy resources to $PUBLISHER_DIR/resources
 
   DEPLOYMENT_ENVS=("dev")

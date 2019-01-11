@@ -1,3 +1,4 @@
+# auto-generated from templates in fb-cloud-platforms-environments
 apiVersion: v1
 kind: Namespace
 metadata:
@@ -12,4 +13,3 @@ metadata:
     cloud-platform.justice.gov.uk/application: "formbuilder-publisher"
     cloud-platform.justice.gov.uk/owner: "Form Builder: formbuilder@digital.justice.gov.uk"
     cloud-platform.justice.gov.uk/source-code: "https://github.com/ministryofjustice/fb-publisher"
-
