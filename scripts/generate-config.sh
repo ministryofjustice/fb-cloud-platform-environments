@@ -21,7 +21,7 @@ do
   do
     helm template formbuilder-publisher -f ./formbuilder-publisher/values/$PLATFORM_ENV-values.yaml -x templates/$CONFIG.yaml > $PUBLISHER_DIR/$CONFIG.yaml
   done
-  # TODO: copy resources to $PUBLISHER_DIR/resources
+  # TODO: template and copy resources to $PUBLISHER_DIR/resources
 
   DEPLOYMENT_ENVS=("dev")
   # DEPLOYMENT_ENVS=("dev" "staging" "production")
@@ -35,7 +35,7 @@ do
       # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
       helm template formbuilder-platform -f ./formbuilder-platform/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml -x templates/$CONFIG.yaml > $PLATFORM_DIR/$CONFIG.yaml
     done
-    # TODO: copy resources to $PLATFORM_DIR/resources
+    # TODO: template and copy resources to $PLATFORM_DIR/resources
 
     SERVICES_DIR=$CPE_DIR/formbuilder-services-$PLATFORM_ENV-$DEPLOYMENT_ENV
     mkdir -p $SERVICES_DIR
@@ -45,7 +45,6 @@ do
       # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
       helm template formbuilder-services -f ./formbuilder-services/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml -x templates/$CONFIG.yaml > $SERVICES_DIR/$CONFIG.yaml
     done
-    # TODO: copy resources to $SERVICES_DIR/resources
     
   done
 done
