@@ -4,6 +4,8 @@ Generate Cloud Platform Environments k8 and terraform config for Form Builder
 
 ## Usage
 
-`sh scripts/generate-config.sh $CPE_DIR`
+`scripts/generate-config.sh path/to/cpe`
 
-where `CPE_DIR` is the path to your Cloud Platform Environments repo
+`CPE_DIR=path/to/cpe scripts/generate-config.sh`
+
+where `path/to/cpe` is the path to your Cloud Platform Environments repo
