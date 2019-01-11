@@ -19,7 +19,7 @@ do
   PUBLISHER_CONFIG=("00-namespace" "01-rbac" "02-limitrange" "03-resourcequota" "04-networkpolicy" "publisher-workers-service-account")
   for CONFIG in ${PUBLISHER_CONFIG[*]};
   do
-    helm template fb-publisher -f ./fb-publisher/values/$PLATFORM_ENV-values.yaml -x templates/$CONFIG.yaml > $PUBLISHER_DIR/$CONFIG.yaml
+    helm template formbuilder-publisher -f ./formbuilder-publisher/values/$PLATFORM_ENV-values.yaml -x templates/$CONFIG.yaml > $PUBLISHER_DIR/$CONFIG.yaml
   done
   # TODO: copy resources to $PUBLISHER_DIR/resources
 
@@ -29,14 +29,20 @@ do
   do
     PLATFORM_DIR=$CPE_DIR/formbuilder-platform-$PLATFORM_ENV-$DEPLOYMENT_ENV
     mkdir -p $PLATFORM_DIR
+    PLATFORM_CONFIG=("00-namespace" "01-rbac" "02-limitrange" "03-resourcequota" "04-networkpolicy" "service-token-cache-service-account" "submitter-workers-service-account" "user-datastore-service-account")
+    for CONFIG in ${PLATFORM_CONFIG[*]};
+    do
+      helm template formbuilder-platform -f ./formbuilder-platform/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml -x templates/$CONFIG.yaml > $PLATFORM_DIR/$CONFIG.yaml
+    done
+
     # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
-    # helm template fb-platform -f ./fb-platform/values/$PLATFORM_ENV-values.yaml > $PLATFORM_DIR/k8.yaml
+    # helm template formbuilder-platform -f ./formbuilder-platform/values/$PLATFORM_ENV-values.yaml > $PLATFORM_DIR/k8.yaml
     # TODO: copy resources to $PLATFORM_DIR/resources
 
     SERVICES_DIR=$CPE_DIR/formbuilder-services-$PLATFORM_ENV-$DEPLOYMENT_ENV
     mkdir -p $SERVICES_DIR
     # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
-    # helm template fb-services -f ./fb-services/values/$PLATFORM_ENV-values.yaml > $SERVICES_DIR/k8.yaml
+    # helm template formbuilder-services -f ./formbuilder-services/values/$PLATFORM_ENV-values.yaml > $SERVICES_DIR/k8.yaml
     # TODO: copy resources to $SERVICES_DIR/resources
     
   done
