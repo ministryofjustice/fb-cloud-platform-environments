@@ -1,0 +1,12 @@
+# auto-generated from templates in fb-cloud-platforms-environments
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: namespace-quota
+  namespace: formbuilder-services-{{ .Values.environmentName }}
+spec:
+  hard:
+    requests.cpu: 1000m
+    requests.memory: 12.8Gi
+    limits.cpu: 15000m
+    limits.memory: 30Gi

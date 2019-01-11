@@ -32,17 +32,19 @@ do
     PLATFORM_CONFIG=("00-namespace" "01-rbac" "02-limitrange" "03-resourcequota" "04-networkpolicy" "service-token-cache-service-account" "submitter-workers-service-account" "user-datastore-service-account")
     for CONFIG in ${PLATFORM_CONFIG[*]};
     do
+      # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
       helm template formbuilder-platform -f ./formbuilder-platform/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml -x templates/$CONFIG.yaml > $PLATFORM_DIR/$CONFIG.yaml
     done
-
-    # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
-    # helm template formbuilder-platform -f ./formbuilder-platform/values/$PLATFORM_ENV-values.yaml > $PLATFORM_DIR/k8.yaml
     # TODO: copy resources to $PLATFORM_DIR/resources
 
     SERVICES_DIR=$CPE_DIR/formbuilder-services-$PLATFORM_ENV-$DEPLOYMENT_ENV
     mkdir -p $SERVICES_DIR
-    # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
-    # helm template formbuilder-services -f ./formbuilder-services/values/$PLATFORM_ENV-values.yaml > $SERVICES_DIR/k8.yaml
+    SERVICES_CONFIG=("00-namespace" "01-rbac" "02-limitrange" "03-resourcequota" "04-networkpolicy")
+    for CONFIG in ${SERVICES_CONFIG[*]};
+    do
+      # TODO: values for $PLATFORM_ENV or $PLATFORM_ENV-$DEPLOYMENT_ENV?
+      helm template formbuilder-services -f ./formbuilder-services/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml -x templates/$CONFIG.yaml > $SERVICES_DIR/$CONFIG.yaml
+    done
     # TODO: copy resources to $SERVICES_DIR/resources
     
   done
