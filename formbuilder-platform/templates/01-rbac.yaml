@@ -1,4 +1,4 @@
-# auto-generated from templates in fb-cloud-platforms-environments
+# auto-generated from fb-cloud-platforms-environments
 # Bind admin role for namespace to team group
 ---
 kind: RoleBinding

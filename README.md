@@ -2,10 +2,19 @@
 
 Generate Cloud Platform Environments k8 and terraform config for Form Builder
 
+## Pre-requisites
+
+- Node
+- Helm
+
+## Installation
+
+`npm install`
+
 ## Usage
 
-`scripts/generate-config.sh path/to/cpe`
+`npm run generate path/to/cpe`
 
-`CPE_DIR=path/to/cpe scripts/generate-config.sh`
+`CPE_DIR=path/to/cpe npm run generate`
 
 where `path/to/cpe` is the path to your Cloud Platform Environments repo

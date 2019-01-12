@@ -1,5 +1,6 @@
+# auto-generated from fb-cloud-platforms-environments
 variable "environment-name" {
-  default = "test"
+  default = "{{ environmentName }}"
 }
 
 variable "team_name" {
@@ -7,7 +8,7 @@ variable "team_name" {
 }
 
 variable "is-production" {
-  default = "false"
+  default = "{{ isProduction }}"
 }
 
 variable "db_backup_retention_period" {

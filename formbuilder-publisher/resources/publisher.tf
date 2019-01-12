@@ -1,3 +1,4 @@
+# auto-generated from fb-cloud-platforms-environments
 ##################################################
 # Publisher RDS
 

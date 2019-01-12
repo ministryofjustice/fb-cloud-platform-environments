@@ -1,0 +1,4 @@
+environmentName: live-dev
+platformEnvironment: live
+deploymentEnvironment: dev
+isProduction: true

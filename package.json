@@ -1,0 +1,26 @@
+{
+  "name": "fb-cloud-platform-environments",
+  "version": "1.0.0",
+  "description": "Generate k8 and terraform Cloud Platform Environments config for Form Builder",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "generate": "./scripts/generate-config.sh $@"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ministryofjustice/fb-cloud-platform-environments.git"
+  },
+  "author": "Alex Robinson <girhub@alex.fu2k.org>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ministryofjustice/fb-cloud-platform-environments/issues"
+  },
+  "homepage": "https://github.com/ministryofjustice/fb-cloud-platform-environments#readme",
+  "dependencies": {
+    "@ministryofjustice/eslint-config-fb": "^1.0.3",
+    "nunjucks": "^3.1.6",
+    "yaml": "^1.2.0",
+    "yargs": "^12.0.5"
+  }
+}

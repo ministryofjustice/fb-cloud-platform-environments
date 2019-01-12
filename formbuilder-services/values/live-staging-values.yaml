@@ -1,0 +1,4 @@
+environmentName: live-staging
+platformEnvironment: live
+deploymentEnvironment: staging
+isProduction: true
