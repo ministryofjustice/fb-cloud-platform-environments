@@ -1,1 +1,5 @@
 isProduction: false
+requests_cpu: 500m
+requests_memory: 6.4Gi
+limits_cpu: 7500m
+limits_memory: 15Gi

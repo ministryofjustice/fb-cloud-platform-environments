@@ -6,7 +6,7 @@ metadata:
   namespace: formbuilder-services-{{ .Values.environmentName }}
 spec:
   hard:
-    requests.cpu: 1000m
-    requests.memory: 12.8Gi
-    limits.cpu: 15000m
-    limits.memory: 30Gi
+    requests.cpu: {{ .Values.requests_cpu }}
+    requests.memory: {{ .Values.requests_memory }}
+    limits.cpu: {{ .Values.limits_cpu }}
+    limits.memory: {{ .Values.limits_memory }}
