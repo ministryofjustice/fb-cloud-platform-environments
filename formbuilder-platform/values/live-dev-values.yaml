@@ -1,0 +1,3 @@
+environmentName: live-dev
+platformEnvironment: live
+deploymentEnvironment: dev
