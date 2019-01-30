@@ -9,9 +9,7 @@
 # add path to namespaces
 CPE_DIR=$CPE_DIR/namespaces/cloud-platform-live-0.k8s.integration.dsd.io
 
-PLATFORM_ENVS=("test" "integration")
-PLATFORM_ENVS=("integration")
-# PLATFORM_ENVS=("test" "integration" "live")
+PLATFORM_ENVS=("test" "integration" "live")
 
 for PLATFORM_ENV in ${PLATFORM_ENVS[*]};
 do
@@ -30,7 +28,7 @@ do
   node scripts/generate-terraform-variables.js --chart formbuilder-publisher --env $PLATFORM_ENV > $PUBLISHER_DIR/resources/variables.tf
 
   DEPLOYMENT_ENVS=("dev" "staging" "production")
-  DEPLOYMENT_ENVS=("dev")
+
   for DEPLOYMENT_ENV in ${DEPLOYMENT_ENVS[*]};
   do
     PLATFORM_DIR=$CPE_DIR/formbuilder-platform-$PLATFORM_ENV-$DEPLOYMENT_ENV
