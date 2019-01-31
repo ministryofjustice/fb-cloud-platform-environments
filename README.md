@@ -1,6 +1,6 @@
 # fb-cloud-platform-environments
 
-Generate Cloud Platform Environments k8 and terraform config for Form Builder
+Generate Cloud Platform Environments k8s and terraform config for Form Builder namespaces
 
 ## Pre-requisites
 
@@ -13,8 +13,45 @@ Generate Cloud Platform Environments k8 and terraform config for Form Builder
 
 ## Usage
 
-`npm run generate path/to/cpe`
+`scripts/generate-config.sh`
 
-`CPE_DIR=path/to/cpe npm run generate`
+By default, this generates the necessary namespace configuration for the publisher, platform apps and services in all platform environments
 
-where `path/to/cpe` is the path to your Cloud Platform Environments repo
+- test
+- integration
+- live
+
+for all deployment environments
+
+- dev
+- staging
+- production
+
+To see available options, run the script with `-h` flag
+
+## Templates and values
+
+### Platform apps
+
+Used to create formbuilder-platform-$PLATFORM_ENV-$DEPLOYMENT_ENV namespace
+
+- `formbuilder-platform/templates`
+- `formbuilder-platform/resources`
+- `formbuilder-platform/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml`
+
+### Services
+
+Used to create formbuilder-services-$PLATFORM_ENV-$DEPLOYMENT_ENV namespace
+
+- `formbuilder-services/templates`
+- `formbuilder-services/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml`
+
+### Publisher
+
+Used to create formbuilder-publisher-$PLATFORM_ENV namespace
+
+- `formbuilder-publisher/templates`
+- `formbuilder-publisher/resources`
+- `formbuilder-publisher/values/$PLATFORM_ENV-values.yaml`
+
+NB. there is only one publisher namespace for a platform which can deploy to all the deployment environments within it.
