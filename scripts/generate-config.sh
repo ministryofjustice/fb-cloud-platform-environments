@@ -3,21 +3,10 @@
 HERE=$0
 
 usage () {
-  if [ "$FB_DEPLOYMENT_ENV" != "none" ]; then
-    DEPLOYMENT_ENV_EXAMPLE="[-d deployment] "
-    DEPLOYMENT_ENV_USAGE="
-  -d, --deployment (optional)
-
-    dev|staging|production
-
-    Deployment environment to deploy to
-    If not specified, defaults to all environments
-  "
-  fi
   echo "
 USAGE
 
-  deploy_platform.sh -p platform $DEPLOYMENT_ENV_EXAMPLE[-c context] [-nh]
+  deploy_platform.sh -p platform [-d deployment] [-c context] [-fh]
 
 PARAMETERS
 
@@ -50,9 +39,11 @@ PARAMETERS
 
 FLAGS
 
-  -n, --dry-run        show commands that would be run
+  -f, --force          generate stub values files if they do not already exist
   -h, --help           help
 "
+
+# -n, --dry-run        show commands that would be run
 
   EXIT_CODE=$1
   [ "$EXIT_CODE" = "" ] && EXIT_CODE=0
@@ -105,6 +96,9 @@ while [ "$1" != "" ]; do
             fi
             CPE_DIR=$VALUE
             ;;
+        -f | --force)
+            FORCE=true
+            ;;
         # -n | --dry-run)
         #     DRY_RUN=true
         #     ;;
@@ -114,15 +108,6 @@ while [ "$1" != "" ]; do
             ;;
     esac
 done
-
-# if [ "$PLATFORM_ENV" = "" ]; then
-#   echo "
-# --platform must be set
-
-#   "
-#   usage 1
-# fi
-
 
 
 if [ "$CPE_DIR" = "" ]; then
@@ -141,8 +126,26 @@ fi
 
 check_config_exists () {
   if [ ! -f "$1" ]; then
-    echo "$1 does not exist"
-    exit 1
+    if [ "$FORCE" = "true" ]; then
+      if [ "$2" = "" ]; then
+        echo "$1 does not exist"
+        exit 1
+      fi
+      if [ "$3" = "" ]; then
+        environmentName="$2"
+        echo "environmentName: $environmentName" >> "$1"
+      else
+        environmentName="$2-$3"
+        platformEnvironment="$2"
+        deploymentEnvironment="$3"
+        echo "environmentName: $environmentName" >> "$1"
+        echo "platformEnvironment: $platformEnvironment" >> "$1"
+        echo "deploymentEnvironment: $deploymentEnvironment" >> "$1"
+      fi
+    else
+      echo "$1 does not exist"
+      exit 1
+    fi
   fi
 }
 
@@ -171,7 +174,7 @@ do
     for CONFIG in ${PUBLISHER_CONFIG[*]};
     do
       PUBLISHER_VALUES="./formbuilder-publisher/values/$PLATFORM_ENV-values.yaml"
-      check_config_exists $PUBLISHER_VALUES
+      check_config_exists $PUBLISHER_VALUES $PLATFORM_ENV
       helm template formbuilder-publisher -f $PUBLISHER_VALUES -x templates/$CONFIG.yaml > $PUBLISHER_DIR/$CONFIG.yaml
     done
     PUBLISHER_RESOURCES=("main" "publisher")
@@ -192,7 +195,7 @@ do
     for CONFIG in ${PLATFORM_CONFIG[*]};
     do
       PLATFORM_FILE="./formbuilder-platform/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml"
-      check_config_exists $PLATFORM_FILE
+      check_config_exists $PLATFORM_FILE $PLATFORM_ENV $DEPLOYMENT_ENV
       helm template formbuilder-platform -f $PLATFORM_FILE -x templates/$CONFIG.yaml > $PLATFORM_DIR/$CONFIG.yaml
     done
     PLATFORM_RESOURCES=("main" "service_token_cache" "submitter" "user-datastore")
@@ -210,7 +213,7 @@ do
     for CONFIG in ${SERVICES_CONFIG[*]};
     do
       SERVICES_FILE="./formbuilder-services/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml"
-      check_config_exists $SERVICES_FILE
+      check_config_exists $SERVICES_FILE $PLATFORM_ENV $DEPLOYMENT_ENV
       helm template formbuilder-services -f $SERVICES_FILE -x templates/$CONFIG.yaml > $SERVICES_DIR/$CONFIG.yaml
     done
     
