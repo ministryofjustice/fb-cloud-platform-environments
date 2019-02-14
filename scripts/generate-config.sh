@@ -6,7 +6,7 @@ usage () {
   echo "
 USAGE
 
-  deploy_platform.sh -p platform [-d deployment] [-c context] [-fh]
+  generate_config.sh -p platform [-d deployment] [-c context] [-fh]
 
 PARAMETERS
 
