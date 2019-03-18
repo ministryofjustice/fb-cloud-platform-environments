@@ -191,13 +191,14 @@ do
   do
     PLATFORM_DIR=$CPE_DIR/formbuilder-platform-$PLATFORM_ENV-$DEPLOYMENT_ENV
     mkdir -p $PLATFORM_DIR/resources
-    PLATFORM_CONFIG=("00-namespace" "01-rbac" "02-limitrange" "03-resourcequota" "04-networkpolicy" "service-token-cache-service-account" "submitter-workers-service-account" "user-datastore-service-account")
-    for CONFIG in ${PLATFORM_CONFIG[*]};
+
+    for CONFIG in $(basename -s .yaml -- ./formbuilder-platform/templates/*.yaml);
     do
       PLATFORM_FILE="./formbuilder-platform/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml"
       check_config_exists $PLATFORM_FILE $PLATFORM_ENV $DEPLOYMENT_ENV
       helm template formbuilder-platform -f $PLATFORM_FILE -x templates/$CONFIG.yaml > $PLATFORM_DIR/$CONFIG.yaml
     done
+
     PLATFORM_RESOURCES=("main" "service_token_cache" "submitter" "user-datastore")
     for PLATFORM_RESOURCE in ${PLATFORM_RESOURCES[*]};
     do
