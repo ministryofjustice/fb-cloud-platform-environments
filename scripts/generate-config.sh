@@ -199,9 +199,12 @@ do
       helm template formbuilder-platform -f $PLATFORM_FILE -x templates/$CONFIG.yaml > $PLATFORM_DIR/$CONFIG.yaml
     done
 
-    PLATFORM_RESOURCES=("main" "service_token_cache" "submitter" "user-datastore")
-    for PLATFORM_RESOURCE in ${PLATFORM_RESOURCES[*]};
+    for PLATFORM_RESOURCE in $(basename -s .tf -- ./formbuilder-platform/resources/*.tf);
     do
+      if [[ "$PLATFORM_RESOURCE" == 'variables' ]]; then
+        continue
+      fi
+
       PLATFORM_RESOURCE_FILE="./formbuilder-platform/resources/$PLATFORM_RESOURCE.tf"
       check_config_exists $PLATFORM_RESOURCE_FILE
       cp $PLATFORM_RESOURCE_FILE $PLATFORM_DIR/resources/$PLATFORM_RESOURCE.tf
