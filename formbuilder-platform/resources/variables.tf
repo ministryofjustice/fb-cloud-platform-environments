@@ -16,7 +16,7 @@ variable "db_backup_retention_period_user_datastore" {
 }
 
 variable "is-production" {
-  default = "false"
+  default = "{{ isProduction }}"
 }
 
 variable "infrastructure-support" {

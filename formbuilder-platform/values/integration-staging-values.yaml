@@ -1,3 +1,4 @@
 environmentName: integration-staging
 platformEnvironment: integration
 deploymentEnvironment: staging
+isProduction: false

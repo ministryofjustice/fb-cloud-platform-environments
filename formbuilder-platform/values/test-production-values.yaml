@@ -1,3 +1,4 @@
 environmentName: test-production
 platformEnvironment: test
 deploymentEnvironment: production
+isProduction: false

@@ -12,7 +12,6 @@ roleRef:
   kind: ClusterRole
   name: admin
   apiGroup: rbac.authorization.k8s.io
-  
 # Bind admin role for namespace to team group & publisher ServiceAccount
 ---
 kind: RoleBinding
