@@ -2,3 +2,4 @@ environmentName: live-production
 platformEnvironment: live
 deploymentEnvironment: production
 isProduction: true
+wildcard_domain: "*.form.service.justice.gov.uk"

@@ -9,10 +9,10 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-  commonName: '*.{{ .Values.platformEnvironment }}.form.service.justice.gov.uk'
+  commonName: '{{ .Values.wildcard_domain }}'
   acme:
     config:
     - domains:
-      - '*.{{ .Values.platformEnvironment }}.form.service.justice.gov.uk'
+      - '{{ .Values.wildcard_domain }}'
       dns01:
         provider: route53-cloud-platform

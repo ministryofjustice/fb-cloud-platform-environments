@@ -1,3 +1,4 @@
 environmentName: integration-staging
 platformEnvironment: integration
 deploymentEnvironment: staging
+wildcard_domain: "*.staging.integration.form.service.justice.gov.uk"

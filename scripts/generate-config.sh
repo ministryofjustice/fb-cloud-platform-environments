@@ -215,11 +215,6 @@ do
     mkdir -p $SERVICES_DIR
     for CONFIG in $(basename -s .yaml -- ./formbuilder-services/templates/*.yaml);
     do
-      if [ "$CONFIG" == 'certificate' ] && [ "$DEPLOYMENT_ENV" != "production" ]
-      then
-        continue
-      fi
-
       SERVICES_FILE="./formbuilder-services/values/$PLATFORM_ENV-$DEPLOYMENT_ENV-values.yaml"
       check_config_exists $SERVICES_FILE $PLATFORM_ENV $DEPLOYMENT_ENV
       helm template formbuilder-services -f $SERVICES_FILE -x templates/$CONFIG.yaml > $SERVICES_DIR/$CONFIG.yaml

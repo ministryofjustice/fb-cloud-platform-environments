@@ -5,3 +5,4 @@ requests_cpu: 1000m
 requests_memory: 12.8Gi
 limits_cpu: 15000m
 limits_memory: 30Gi
+wildcard_domain: "*.dev.test.form.service.justice.gov.uk"
