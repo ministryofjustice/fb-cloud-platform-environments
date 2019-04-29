@@ -1,3 +1,4 @@
 environmentName: integration-production
 platformEnvironment: integration
 deploymentEnvironment: production
+wildcard_domain: "*.integration.form.service.justice.gov.uk"

@@ -1,3 +1,4 @@
 environmentName: test-staging
 platformEnvironment: test
 deploymentEnvironment: staging
+wildcard_domain: "*.staging.test.form.service.justice.gov.uk"

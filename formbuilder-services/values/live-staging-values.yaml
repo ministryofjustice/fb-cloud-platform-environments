@@ -2,3 +2,4 @@ environmentName: live-staging
 platformEnvironment: live
 deploymentEnvironment: staging
 isProduction: true
+wildcard_domain: "*.staging.form.service.justice.gov.uk"
