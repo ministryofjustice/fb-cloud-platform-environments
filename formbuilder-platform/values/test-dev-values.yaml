@@ -1,3 +1,4 @@
 environmentName: test-dev
 platformEnvironment: test
 deploymentEnvironment: dev
+isProduction: false

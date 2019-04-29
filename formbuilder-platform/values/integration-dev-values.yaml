@@ -1,3 +1,4 @@
 environmentName: integration-dev
 platformEnvironment: integration
 deploymentEnvironment: dev
+isProduction: false

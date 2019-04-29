@@ -162,7 +162,7 @@ if [ "$DEP_LENGTH" = "0" ]; then
 fi
 
 # add path to namespaces
-CPE_DIR=$CPE_DIR/namespaces/cloud-platform-live-0.k8s.integration.dsd.io
+CPE_DIR=$CPE_DIR/namespaces/live-1.cloud-platform.service.justice.gov.uk
 
 for PLATFORM_ENV in ${PLATFORM_ENVS[*]};
 do

@@ -3,7 +3,7 @@
 # Publisher RDS
 
 module "publisher-rds-instance" {
-  source = "github.com/ministryofjustice/cloud-platform-terraform-rds-instance?ref=3.1"
+  source = "github.com/ministryofjustice/cloud-platform-terraform-rds-instance?ref=4.0"
 
   cluster_name               = "${var.cluster_name}"
   cluster_state_bucket       = "${var.cluster_state_bucket}"
@@ -32,7 +32,7 @@ resource "kubernetes_secret" "publisher-rds-instance" {
 ########################################################
 # Publisher Elasticache Redis (for resque + job logging)
 module "publisher-elasticache" {
-  source = "github.com/ministryofjustice/cloud-platform-terraform-elasticache-cluster?ref=2.1"
+  source = "github.com/ministryofjustice/cloud-platform-terraform-elasticache-cluster?ref=3.0"
 
   cluster_name         = "${var.cluster_name}"
   cluster_state_bucket = "${var.cluster_state_bucket}"

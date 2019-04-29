@@ -1,3 +1,4 @@
 environmentName: test-staging
 platformEnvironment: test
 deploymentEnvironment: staging
+isProduction: false
