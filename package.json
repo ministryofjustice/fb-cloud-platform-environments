@@ -18,9 +18,9 @@
   },
   "homepage": "https://github.com/ministryofjustice/fb-cloud-platform-environments#readme",
   "dependencies": {
-    "@ministryofjustice/eslint-config-fb": "^1.0.5",
+    "@ministryofjustice/eslint-config-fb": "^1.0.7",
     "nunjucks": "^3.2.0",
-    "yaml": "^1.4.0",
-    "yargs": "^13.2.2"
+    "yaml": "^1.6.0",
+    "yargs": "^13.2.4"
   }
 }
