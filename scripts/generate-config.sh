@@ -170,8 +170,7 @@ do
   if [ "$FB_PUBLISHER" != "false" ]; then
     PUBLISHER_DIR=$CPE_DIR/formbuilder-publisher-$PLATFORM_ENV
     mkdir -p $PUBLISHER_DIR/resources
-    PUBLISHER_CONFIG=("00-namespace" "01-rbac" "02-limitrange" "03-resourcequota" "04-networkpolicy" "publisher-workers-service-account")
-    for CONFIG in ${PUBLISHER_CONFIG[*]};
+    for CONFIG in $(basename -s .yaml -- ./formbuilder-publisher/templates/*.yaml);
     do
       PUBLISHER_VALUES="./formbuilder-publisher/values/$PLATFORM_ENV-values.yaml"
       check_config_exists $PUBLISHER_VALUES $PLATFORM_ENV
